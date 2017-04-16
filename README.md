@@ -1,6 +1,6 @@
 # require-yaml
 
-[![Build Status](https://travis-ci.org/m90/require-yaml.svg?branch=master)](https://travis-ci.org/m90/require-yaml)
+[![Build Status](https://travis-ci.org/eaoearson/require-yaml.svg?branch=master)](https://travis-ci.org/eapearson/require-yaml)
 
 > a transform for loading YAML files in requirejs, using [js-yaml][1]
 
