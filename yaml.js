@@ -1,6 +1,6 @@
 define([
     'text',
-    'yaml2'
+    'js-yaml'
 ], function(
     text,
     yaml
@@ -23,7 +23,7 @@ define([
         load: function(name, parentRequire, onload, config) {
             text.get(parentRequire.toUrl(name), function(yamlString) {
                 try {
-                    var result = yaml.eval(yamlString);
+                    var result = yaml.safeLoad(yamlString);
                     if (config.isBuild) {
                         buildMap[name] = JSON.stringify(result);
                     }
@@ -34,6 +34,6 @@ define([
             });
 
         },
-        version: '1.0.0'
+        version: '1.0.1'
     };
 });

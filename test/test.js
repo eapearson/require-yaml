@@ -1,5 +1,6 @@
 var requirejs = require('requirejs');
 var assert = require('assert');
+var util = require('util');
 
 requirejs.config({
     nodeRequire: require,
@@ -7,6 +8,7 @@ requirejs.config({
     paths: {
         'text': './bower_components/requirejs-text/text',
         'yaml2': './bower_components/yaml2/lib/browser',
+        'js-yaml': './bower_components/js-yaml/dist/js-yaml',
         'yaml': './yaml'
     }
 });
@@ -24,8 +26,9 @@ describe('yaml loader', function() {
                     greeting: 'hello'
                 };
                 var input = 'greeting: "hello"';
-                console.log('yaml is...', yamljs);
-                assert.deepEqual(expected, yamljs.eval(input));
+                var actual = yamljs.eval(input);
+                console.log('yaml is...', actual);
+                assert.deepEqual(expected, actual);
             } catch (ex) {
                 console.log('failed', ex);
                 done.fail();
@@ -36,20 +39,23 @@ describe('yaml loader', function() {
 
     it('should render YAML into JavaScript objects', function(done) {
         requirejs(['yaml!test/fixtures/test.yaml'], function(data) {
-            assert.deepEqual(data, {
+            console.log('data', data);
+            var expected = {
                 key1: 'string',
                 key2: {
                     nested1: 999,
                     nested2: 'foo'
                 },
                 key3: [9, 8, 7, 6]
-            });
+            };
+            assert.deepEqual(data, expected);
             done();
         });
     });
 
     it('should call the errback on malformed input', function(done) {
-        requirejs(['yaml!test/fixtures/invalid.yaml'], function() {
+        requirejs(['yaml!test/fixtures/invalid.yaml'], function(data) {
+            console.log('oops', util.inspect(data, false, null));
             assert(false);
             done();
         }, function(err) {
