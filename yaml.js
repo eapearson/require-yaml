@@ -23,7 +23,7 @@ define([
         load: function(name, parentRequire, onload, config) {
             text.get(parentRequire.toUrl(name), function(yamlString) {
                 try {
-                    var result = yaml.parse(yamlString);
+                    var result = yaml.eval(yamlString);
                     if (config.isBuild) {
                         buildMap[name] = JSON.stringify(result);
                     }
