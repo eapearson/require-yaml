@@ -32,7 +32,7 @@
     "dependencies": {
         "requirejs-text": "^2.0.12",
         "yaml2": "eapearson/yaml2#1.0.1",
-        "js-yaml": "^3.8.3"
+        "js-yaml": "eapearson/js-yaml#3.8.6"
     },
     "devDependencies": {
         "almond": "^0.3.0"

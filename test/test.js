@@ -7,7 +7,6 @@ requirejs.config({
     baseUrl: '.',
     paths: {
         'text': './bower_components/requirejs-text/text',
-        'yaml2': './bower_components/yaml2/lib/browser',
         'js-yaml': './bower_components/js-yaml/dist/js-yaml',
         'yaml': './yaml'
     }
@@ -17,17 +16,20 @@ describe('yaml loader', function() {
 
     it('Should use the core yaml parser', function(done) {
         requirejs([
-            'yaml2'
+            'js-yaml'
         ], function(
             yamljs
         ) {
             try {
                 var expected = {
-                    greeting: 'hello'
+                    greeting: 'hello',
+                    anumber: 1,
+                    nested: {
+                        more: ['more']
+                    }
                 };
-                var input = 'greeting: "hello"';
-                var actual = yamljs.eval(input);
-                console.log('yaml is...', actual);
+                var input = 'greeting: "hello"\nanumber: 1\nnested:\n  more: ["more"]';
+                var actual = yamljs.safeLoad(input);
                 assert.deepEqual(expected, actual);
             } catch (ex) {
                 console.log('failed', ex);
@@ -39,7 +41,6 @@ describe('yaml loader', function() {
 
     it('should render YAML into JavaScript objects', function(done) {
         requirejs(['yaml!test/fixtures/test.yaml'], function(data) {
-            console.log('data', data);
             var expected = {
                 key1: 'string',
                 key2: {
