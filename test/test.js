@@ -67,6 +67,7 @@ describe('yaml loader', function() {
 
 });
 
+// This needs to be rigged up correcttly to work
 // describe('yaml writer', function(done) {
 //     it('compiles YAML into dependency-less modules', function(done) {
 
@@ -77,7 +78,7 @@ describe('yaml loader', function() {
 //             name: './bower_components/almond/almond',
 //             paths: {
 //                 'text': './bower_components/requirejs-text/text',
-//                 'yaml.js': './bower_components/yaml.js/dist/yaml',
+//                 'js-yaml': './bower_components/js-yaml/dist/js-yaml',
 //                 'yaml': './yaml'
 //             },
 //             optimize: 'none',
@@ -88,6 +89,7 @@ describe('yaml loader', function() {
 //         }, function() {
 //             var exec = require('child_process').exec;
 //             var process = exec('phantomjs test/loadindex.js', function(err, stdout) {
+//                 console.error('ERR', err);
 //                 if (err) {
 //                     assert(false);
 //                 } else {
